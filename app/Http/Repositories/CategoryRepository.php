@@ -119,7 +119,9 @@ class CategoryRepository implements CategoryInterface
 
     public function trash()
     {
-        $categories = Category::onlyTrashed()->paginate();
+        $categories = Category::onlyTrashed()
+        ->search(request())
+        ->paginate();
         return view('dashboard.categories.trash', compact('categories'));
     } // end of trash
 
