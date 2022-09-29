@@ -14,5 +14,11 @@ return
         'title' => 'Categories',
         'active' => 'categories.*',
     ],
+    [
+        'icon' => 'fas fa-tags nav-icon',
+        'route' => 'products.index',
+        'title' => 'Products',
+        'active' => 'products.*',
+    ],
 
 ];

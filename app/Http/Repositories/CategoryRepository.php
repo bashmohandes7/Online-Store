@@ -52,8 +52,9 @@ class CategoryRepository implements CategoryInterface
 
     public function show($category)
     {
-        // TODO: Implement show() method.
-    }
+        $products = $category->products()->with('store')->latest()->paginate(5);
+        return view('dashboard.categories.show', compact('category', 'products'));
+    } // end of show
 
 
     public function edit($category)
