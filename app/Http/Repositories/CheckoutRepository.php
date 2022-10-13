@@ -2,6 +2,7 @@
 
 namespace App\Http\Repositories;
 
+use App\Events\OrderCreatedEvent;
 use Throwable;
 use App\Models\Order;
 use App\Models\OrderDetails;
@@ -65,6 +66,7 @@ class CheckoutRepository implements CheckoutInterface
             } // end of main foreach
 
             DB::commit();
+            event(new OrderCreatedEvent($order));
         } catch (Throwable $e) {
             DB::rollBack();
             throw $e;
