@@ -10,7 +10,10 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $products = Product::with('category')->active()->latest()->take(8)->get();
+        $products = Product::with('category')->active()
+            //->latest()
+            ->limit(8)
+            ->get();
         return view('front.home', compact('products'));
     } // end of index
 }

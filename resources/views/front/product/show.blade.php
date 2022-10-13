@@ -103,7 +103,9 @@
                                     <div class="row align-items-end">
                                         <div class="col-lg-4 col-md-4 col-12">
                                             <div class="button cart-button">
-                                                <button class="btn" type="submit" style="width: 100%;">Add to
+                                                <button class="btn add-to-cart" data-id="{{ $product->id }}"
+                                                    data-quantity="{{ request()->quantity }}" type="submit"
+                                                    style="width: 100%;">Add to
                                                     Cart</button>
                                             </div>
                                         </div>

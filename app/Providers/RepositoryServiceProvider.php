@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Http\Interfaces\CartInterface;
 use Illuminate\Support\ServiceProvider;
+use App\Http\Repositories\CartRepository;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -28,6 +30,14 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(
             'App\Http\Interfaces\ProfileInterface',
             'App\Http\Repositories\ProfileRepository'
+        );
+        $this->app->bind(
+            'App\Http\Interfaces\CartInterface',
+            'App\Http\Repositories\CartRepository'
+        );
+        $this->app->bind(
+            'App\Http\Interfaces\CheckoutInterface',
+            'App\Http\Repositories\CheckoutRepository'
         );
     }
 

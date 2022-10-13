@@ -1,10 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Dashboard\ProductController;
+use App\Http\Controllers\Dashboard\ProfileController;
+use App\Http\Controllers\Dashboard\CategoryController;
+use App\Http\Controllers\Dashboard\DashboardController;
 
 // Dashboard route
-Route::group(['middleware' => ['auth', 'auth-type:admin,super-admin'], 'prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
-    Route::get('/', [DashboardController::class, 'index'])->name('dashboard.dashboard');
+Route::group(['middleware' => ['auth', 'auth-type:admin,super-admin'], 'prefix' => 'admin', 'as' => 'dashboard.'], function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('admin');
     Route::get('/categories/trash', [CategoryController::class, 'trash'])->name('categories.trash');
     Route::put('/categories/{category}/restore', [CategoryController::class, 'restore'])->name('categories.restore');
     Route::delete('/categories/{category}/force-delete', [CategoryController::class, 'forceDelete'])->name('categories.forceDelete');

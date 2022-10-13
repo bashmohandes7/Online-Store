@@ -24,7 +24,7 @@
 
             @forelse($products as $product)
                 <tr>
-                    <td><img src="{{ asset('storage/' . $product->image) }}" alt="" height="50"></td>
+                    <td><img src="{{ $product->image_path }}" alt="" height="50"></td>
                     <td>{{ $product->name }}</td>
                     <td>{{ $product->store->name }}</td>
                     <td>{{ $product->status }}</td>

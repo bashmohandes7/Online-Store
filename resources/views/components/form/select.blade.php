@@ -1,15 +1,14 @@
-@props(['name', 'options' => [], 'value'])
+@props(['name', 'selected' => '', 'label' => false, 'options'])
 
+@if ($label)
+    <label for="">{{ $label }}</label>
+@endif
 
 <select name="{{ $name }}"
     {{ $attributes->class(['form-control', 'form-select', 'is-invalid' => $errors->has($name)]) }}>
-    <option value="">Primary Category</option>
-    @foreach ($options as $option)
-        <option value="{{ $option->id }}" @selected(old($option->id, $value) == $value)>{{ $option->name }}</option>
+    @foreach ($options as $value => $text)
+        <option value="{{ $value }}" @selected($value == $selected)>{{ $text }}</option>
     @endforeach
 </select>
-@error($name)
-    <div class="invalid-feedback">
-        {{ $message }}
-    </div>
-@enderror
+
+<x-form.validation-feedback :name="$name" />

@@ -9,7 +9,7 @@
 
 @section('content')
     <div class="mb-5">
-        <a href="{{ route('products.create') }}" class="btn btn-sm btn-outline-primary mr-2">Create</a>
+        <a href="{{ route('dashboard.products.create') }}" class="btn btn-sm btn-outline-primary mr-2">Create</a>
     </div>
     <x-alert type="success" />
     <x-alert type="delete" alert="danger" />
@@ -51,10 +51,11 @@
                     <td>{{ $product->status }}</td>
                     <td>{{ $product->created_at }}</td>
                     <td>
-                        <a href="{{ route('products.edit', $product->id) }}" class="btn btn-sm btn-outline-success">Edit</a>
+                        <a href="{{ route('dashboard.products.edit', $product->id) }}"
+                            class="btn btn-sm btn-outline-success">Edit</a>
                     </td>
                     <td>
-                        <form action="{{ route('products.destroy', $product->id) }}" method="post">
+                        <form action="{{ route('dashboard.products.destroy', $product->id) }}" method="post">
                             @csrf
                             <!-- Form Method Spoofing -->
                             @method('delete')

@@ -1,7 +1,7 @@
 @props([
     'type' => 'text',
     'name',
-    'value',
+    'value' => '',
 ])
 
 <input type="{{ $type }}" name="{{ $name }}" value="{{ old($name, $value) }}"

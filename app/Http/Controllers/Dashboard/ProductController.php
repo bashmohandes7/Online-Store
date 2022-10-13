@@ -48,10 +48,10 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
-    {
-        return $this->productInterface->show($product);
-    } // end of show
+    // public function show(Product $product)
+    // {
+    //     return $this->productInterface->show($product);
+    // } // end of show
 
     /**
      * Show the form for editing the specified resource.
