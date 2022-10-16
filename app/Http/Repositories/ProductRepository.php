@@ -8,6 +8,7 @@ use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Interfaces\ProductInterface;
+use App\Models\Tag;
 
 class ProductRepository implements ProductInterface
 {
@@ -19,9 +20,10 @@ class ProductRepository implements ProductInterface
 
     public function create()
     {
-        $categories = Category::all();
+        $categories = Category::get();
         $product = new Product();
-        return view('dashboard.products.create', compact('categories', 'product'));
+        $tags = new Tag();
+        return view('dashboard.products.create', compact('categories', 'product', 'tags'));
     } // end of create
     public function store($request)
     {

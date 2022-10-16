@@ -30,14 +30,17 @@
 
 <div class="form-group">
     <label for="">Category</label>
-
-    <x-form.select name="category_id" :options="$categories" :value="$product->id" />
-
+    <select name="category_id" class="form-control form-select">
+        <option value="">Primary Category</option>
+        @foreach ($categories as $category)
+            <option value="{{ $category->id }}" @selected(old('category_id', $product->category_id) == $category->id)>{{ $category->name }}</option>
+        @endforeach
+    </select>
 </div>
 
 <div class="form-group">
-    <label for="compare_price">Tags</label>
-    <x-form.input type="text" name="tags"  :value="$tags" />
+    <label for="tags">Tags</label>
+    <x-form.input type="text" name="tags" :value="$tags" />
 </div>
 
 <div class="form-group">
@@ -82,16 +85,16 @@
 </div>
 
 @push('styles')
-<link href="{{ asset('dashboard/dist/css/tagify.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('dashboard/dist/css/tagify.css') }}" rel="stylesheet" type="text/css" />
 @endpush
 @push('scripts')
-<script src="{{ asset('dashboard/dist/js/tagify.min.js') }}"></script>
-<script src="{{ asset('dashboard/dist/js/tagify.polyfills.min.js') }}"></script>
-<script>
-    var inputElm = document.querySelector('[name=tags]'),
-    tagify = new Tagify (inputElm);
-</script>
-<script>
+    <script src="{{ asset('dashboard/dist/js/tagify.min.js') }}"></script>
+    <script src="{{ asset('dashboard/dist/js/tagify.polyfills.min.js') }}"></script>
+    <script>
+        var inputElm = document.querySelector('[name=tags]'),
+            tagify = new Tagify(inputElm);
+    </script>
+    <script>
         $(document).ready(function() {
             // image preview
             $(".image").change(function() {

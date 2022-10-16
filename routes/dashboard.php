@@ -7,7 +7,7 @@ use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\DashboardController;
 
 // Dashboard route
-Route::group(['middleware' => ['auth', 'auth-type:admin,super-admin'], 'prefix' => 'admin', 'as' => 'dashboard.'], function () {
+Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin', 'as' => 'dashboard.'], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('admin');
     Route::get('/categories/trash', [CategoryController::class, 'trash'])->name('categories.trash');
     Route::put('/categories/{category}/restore', [CategoryController::class, 'restore'])->name('categories.restore');
