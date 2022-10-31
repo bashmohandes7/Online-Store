@@ -46,10 +46,10 @@
                 <div class="row align-items-center">
                     <div class="col-lg-4 col-md-4 col-12">
                         <div class="top-left">
-                            {{-- <ul class="menu-top-link">
+                            <ul class="menu-top-link">
                                 <li>
                                     <div class="select-position">
-                                        <form action="{{ route('currency.store') }}" method="post">
+                                        <form action="" method="post">
                                             @csrf
                                             <select name="currency_code" onchange="this.form.submit()">
                                                 <option value="USD" @selected('USD' == session('currency_code'))>$ USD</option>
@@ -64,7 +64,7 @@
                                 </li>
                                 <li>
                                     <div class="select-position">
-                                        <form action="{{ URL::current() }}" method="get">
+                                         <form action="{{ URL::current() }}" method="get">
                                             <select name="locale" onchange="this.form.submit()">
                                                 @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
                                                     <option value="{{ $localeCode }}" @selected($localeCode == App::currentLocale())>
@@ -74,7 +74,7 @@
                                         </form>
                                     </div>
                                 </li>
-                            </ul> --}}
+                            </ul>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4 col-12">

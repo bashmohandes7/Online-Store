@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 
+
 use NumberFormatter;
 
 class Currency
@@ -10,7 +11,7 @@ class Currency
     {
         $formattwer = new NumberFormatter(config('app.locale'), NumberFormatter::CURRENCY);
         if ($currency === null) {
-            $currency = 'USD';
+            $currency = config('app.currency');
         }
         return $formattwer->formatCurrency($amount, $currency);
     } // end of format
