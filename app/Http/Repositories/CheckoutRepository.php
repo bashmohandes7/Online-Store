@@ -3,6 +3,7 @@
 namespace App\Http\Repositories;
 
 use App\Events\OrderCreatedEvent;
+use App\Exceptions\InvalidOrderException;
 use Throwable;
 use App\Models\Order;
 use App\Models\OrderDetails;
@@ -18,7 +19,7 @@ class CheckoutRepository implements CheckoutInterface
     public function create($cart)
     {
         if ($cart->get()->count() == 0) {
-            return to_route('home');
+            throw new InvalidOrderException('Empty cart');
         }
         return View('front.checkout.checkout', [
             'cart' => $cart,
@@ -41,7 +42,6 @@ class CheckoutRepository implements CheckoutInterface
         DB::beginTransaction();
         try {
             foreach ($items as $store_id => $cart_items) {
-
                 $order = Order::create([
                     'store_id' => $store_id,
                     'user_id' => Auth::id(),
