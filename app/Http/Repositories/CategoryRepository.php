@@ -2,19 +2,20 @@
 
 namespace App\Http\Repositories;
 
-
 use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Interfaces\CategoryInterface;
+use Illuminate\Support\Facades\Gate;
 use Image;
 
 class CategoryRepository implements CategoryInterface
 {
-
-
     public function index($request)
     {
+        if (Gate::denies('categories.index')) {
+            abort(403);
+        } // end of if
         $categories = Category::search($request)
             ->withoutTrashed()
             ->paginate();
@@ -24,6 +25,9 @@ class CategoryRepository implements CategoryInterface
 
     public function create()
     {
+        if (Gate::denies('categories.create')) {
+            abort(403);
+        } // end of if
         $parents = Category::all();
         $category = new Category();
         return view('dashboard.categories.create', compact('parents', 'category'));
@@ -32,6 +36,9 @@ class CategoryRepository implements CategoryInterface
 
     public function store($request)
     {
+        if (Gate::denies('categories.create')) {
+            abort(403);
+        } // end of if
         $request_data = $request->except(['image']);
         if ($request->image) {
             Image::make($request->image)
@@ -52,6 +59,9 @@ class CategoryRepository implements CategoryInterface
 
     public function show($category)
     {
+        if (Gate::denies('categories.index')) {
+            abort(403);
+        } // end of if
         $products = $category->products()->with('store')->latest()->paginate(5);
         return view('dashboard.categories.show', compact('category', 'products'));
     } // end of show
@@ -59,6 +69,9 @@ class CategoryRepository implements CategoryInterface
 
     public function edit($category)
     {
+        if (Gate::denies('categories.update')) {
+            abort(403);
+        } // end of if
         if (!$category) {
             return to_route('categories.index')
                 ->with('info', 'Record not found!');
@@ -81,12 +94,13 @@ class CategoryRepository implements CategoryInterface
 
     public function update($category, $request)
     {
+        if (Gate::denies('categories.create')) {
+            abort(403);
+        } // end of if
         $request_data = $request->except(['image']);
 
         if ($request->image) {
-
-            if ($category->image != NULL) {
-
+            if ($category->image != null) {
                 Storage::disk('public_uploads')->delete('/category_images/' . $category->image);
             } //end of inner if
 
@@ -139,7 +153,6 @@ class CategoryRepository implements CategoryInterface
     {
         $category = Category::onlyTrashed()->findOrFail($id);
         if ($category->image != '') {
-
             Storage::disk('public_uploads')->delete('/category_images/' . $category->image);
         } //end of if
 

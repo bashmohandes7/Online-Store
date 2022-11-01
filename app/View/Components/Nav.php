@@ -2,16 +2,19 @@
 
 namespace App\View\Components;
 
+use Illuminate\Support\Facades\Route;
 use Illuminate\View\Component;
 
 class Nav extends Component
 {
     public $items;
+    public $active;
 
 
     public function __construct()
     {
-        $this->items = config('nav');
+        $this->items = $this->prepareItems(config('nav'));
+        $this->active = Route::currentRouteName();
     }
 
     /**
@@ -22,5 +25,16 @@ class Nav extends Component
     public function render()
     {
         return view('components.nav');
+    }
+
+    protected function prepareItems($items)
+    {
+        $user = auth()->user();
+        foreach ($items as $key => $item) {
+            if (isset($item['permission']) && !$user->can($item['permission'])) {
+                unset($items[$key]);
+            }
+        }
+        return $items;
     }
 }

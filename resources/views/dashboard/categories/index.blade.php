@@ -9,7 +9,9 @@
 
 @section('content')
     <div class="mb-5">
-        <a href="{{ route('dashboard.categories.create') }}" class="btn btn-sm btn-outline-primary mr-2">Create</a>
+        @can('categories.create')
+            <a href="{{ route('dashboard.categories.create') }}" class="btn btn-sm btn-outline-primary mr-2">Create</a>
+        @endcan
         <a href="{{ route('dashboard.categories.trash') }}" class="btn btn-sm btn-outline-danger mr-2">Trash</a>
     </div>
     <x-alert type="success" />
