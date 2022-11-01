@@ -5,6 +5,7 @@ use App\Http\Controllers\Dashboard\ProductController;
 use App\Http\Controllers\Dashboard\ProfileController;
 use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\ImportProductController;
 use App\Http\Controllers\Dashboard\RoleController;
 
 // Dashboard route
@@ -16,7 +17,8 @@ Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin', 'as' => 'dash
 
     Route::get('profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('profile/update', [ProfileController::class, 'update'])->name('profile.update');
-    // Route::resource('roles', RoleController::class);
+    Route::get('products/import', [ImportProductController::class, 'create'])->name('products.import');
+    Route::post('products/import', [ImportProductController::class, 'create']);
     Route::resources([
         'categories' => CategoryController::class,
         'products' => ProductController::class,
