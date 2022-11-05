@@ -20,4 +20,9 @@ return [
 'roles.create' => 'Roles Create',
 'roles.update' => 'Roles Update',
 'roles.delete' => 'Roles Delete',
+
+'admins.index' => 'Admins View',
+'admins.create' => 'Admins Create',
+'admins.update' => 'Admins Update',
+'admins.delete' => 'Admins Delete',
 ];

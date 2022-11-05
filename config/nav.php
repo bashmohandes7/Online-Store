@@ -24,17 +24,17 @@ return
         ],
         [
             'icon' => 'fas fa-tags nav-icon',
-            'route' => 'dashboard.orders.index',
-            'title' => 'Orders',
-            'active' => 'orders.*',
-            'permission' => 'orders.index',
-        ],
-        [
-            'icon' => 'fas fa-tags nav-icon',
             'route' => 'dashboard.roles.index',
             'title' => 'Roles',
             'active' => 'roles.*',
             'permission' => 'roles.index',
+        ],
+        [
+            'icon' => 'fas fa-users nav-icon',
+            'route' => 'dashboard.admins.index',
+            'title' => 'Admins',
+            'active' => 'admins.*',
+            'permission' => 'admins.index',
         ],
 
     ];

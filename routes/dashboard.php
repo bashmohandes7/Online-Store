@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Dashboard\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\ProductController;
 use App\Http\Controllers\Dashboard\ProfileController;
@@ -22,6 +23,7 @@ Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin', 'as' => 'dash
     Route::resources([
         'categories' => CategoryController::class,
         'products' => ProductController::class,
-        'roles' => RoleController::class
+        'roles' => RoleController::class,
+        'admins' => AdminController::class,
     ]);
 });

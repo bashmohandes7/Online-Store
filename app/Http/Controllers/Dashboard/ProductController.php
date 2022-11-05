@@ -18,6 +18,7 @@ class ProductController extends Controller
     } // end of constructor
     public function index(ProductInterface $productInterface)
     {
+        $this->authorize('view-any', Product::class);
         return $this->productInterface->index();
     } // end of index
 
@@ -28,6 +29,7 @@ class ProductController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Product::class);
         return $this->productInterface->create();
     } // end of create
 
@@ -39,6 +41,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', Product::class);
         return $this->productInterface->store($request);
     }
 
@@ -61,6 +64,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
+        $this->authorize('view',$product);
         return $this->productInterface->edit($product);
     } // end of edit
 
@@ -73,6 +77,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
+        $this->authorize('update',$product);
         return $this->productInterface->update($request, $product);
     } // end of update
 
