@@ -14,6 +14,8 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -33,7 +35,10 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
-        'store_id'
+        'store_id',
+        'provider',
+        'provider_id',
+        'provider_token'
     ];
 
     /**
@@ -44,6 +49,7 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $hidden = [
         'password',
         'remember_token',
+        'provider_token',
     ];
 
     /**
@@ -70,4 +76,19 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return Str::title($value);
     } // end of getNameAttribute
+
+    protected function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = Hash::make($value);
+    } // end of Password
+
+    public function setProviderTokenAttribute($value)
+    {
+        $this->attributes['provider_token'] = Crypt::encryptString($value);
+    } // end of setProviderTokenAttribute
+
+    public function getProviderTokenAttribute($value)
+    {
+        return Crypt::decryptString($value);
+    } // end of getProviderTokenAttribute
 } // end of class Profile

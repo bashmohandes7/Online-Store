@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\SocialLoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Front\CartController;
 use App\Http\Controllers\Front\HomeController;
@@ -24,6 +25,10 @@ Route::resource('cart', CartController::class);
 Route::get('checkout', [CheckoutController::class, 'create'])->name('checkout');
 Route::post('checkout', [CheckoutController::class, 'store']);
 
+Route::get('/auth/redirect', [SocialLoginController::class, 'redirect'])
+->name('auth.socialite.redirect');
+Route::get('/auth/callback', [SocialLoginController::class, 'callback'])
+->name('auth.socialite.callback');
 // 2FA Authentication
 Route::get('auth/user/2fa', [TwoFactorAuthentcationController::class, 'index'])
     ->name('front.2fa');
